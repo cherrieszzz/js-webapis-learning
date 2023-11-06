@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>random-name-picker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">点击开始以抽取问题</div>
+        <div class="btn-group">
+            <button class="start-btn">开始</button>
+            <button class="end-btn">结束</button>
+        </div>
+
+    </div>
+
+    <script>
+        // 定义一个数组变量，用来存储问题
+        let questions = [
+            "HTML中的DOCTYPE声明有什么作用？",
+            "CSS中的盒模型是什么？如何计算元素的宽度和高度？",
+            "JavaScript中的原型和原型链是什么？如何实现继承？",
+            "什么是AJAX？它的优缺点有哪些？",
+            "什么是跨域请求？有哪些解决方案？",
+            "什么是响应式布局？如何使用媒体查询实现？",
+            "什么是BOM和DOM？它们之间有什么区别？",
+            "什么是事件冒泡和事件捕获？如何阻止它们？",
+            "什么是闭包？它有哪些应用场景？",
+            "什么是Promise？如何使用它处理异步操作？"
+        ];
+
+        const content = document.querySelector('.content');
+
+        const showRandomContent = () => {
+            let randomArrayNum = Math.floor(Math.random() * questions.length);
+            content.innerHTML = questions[randomArrayNum];
+        }
+
+        const startBtn = document.querySelector('.start-btn');
+        startBtn.addEventListener('click', () => {
+            startBtn.disabled = true;
+            endBtn.disabled = false;
+            window.n = setInterval(showRandomContent, 100);
+        })
+
+        const endBtn = document.querySelector('.end-btn');
+        endBtn.disabled = true;
+        endBtn.addEventListener('click', () => {
+            startBtn.disabled = false;
+            endBtn.disabled = true;
+            clearInterval(n);
+        })
+
+    </script>
+</body>
+</html>

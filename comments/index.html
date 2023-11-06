@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>comments</title>
+    <style>
+        .container {
+
+        }
+        .input {
+            height: 60px;
+            transition: all 0.5s;
+        }
+        .input:focus {
+            height: 100px;
+        }
+        .comment {
+            background-color: aliceblue;
+            width: 100px;
+            padding: 10px 10px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <textarea class="input"></textarea>
+            <div class="total"></div>
+        </div>
+
+        <button class="comment-btn-enter">评论</button>
+
+        <div class="comments">
+
+        </div>
+    </div>
+
+    <script>
+        const input = document.querySelector('.input');
+        const total = document.querySelector('.total');
+        const comments = document.querySelector('.comments');
+
+        total.style.display = 'none';
+
+        input.addEventListener('focus', () => {
+            total.style.display = 'block'
+            total.innerHTML = `共0字`;
+        })
+
+        input.addEventListener('input', () => {
+            total.innerHTML = `共${input.value.length}字`;
+        })
+
+        input.addEventListener('blur', () => {
+            total.style.display = 'none'
+        })
+
+        input.addEventListener('keyup', (e) => {
+            if(e.key === 'Enter') {
+                if(input.value.trim().length === 0) {
+                    alert('请不要输入空值');
+                    input.value = '';
+                    return
+                }
+                let newComment = document.createElement('div');
+                newComment.innerText = input.value.trim();
+                newComment.className = 'comment';
+                comments.appendChild(newComment);
+                input.value = '';
+            }
+        })
+
+
+    </script>
+</body>
+</html>

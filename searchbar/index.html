@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>searchbar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <input type="search" name="search" id="" class="search" />
+    <div class="menu">
+        <ul class="menu-list">
+            <li>test</li>
+            <li>test</li>
+            <li>test</li>
+            <li>test</li>
+            <li>test</li>
+        </ul>
+    </div>
+</div>
+<script>
+    const searchbar = document.querySelector('.search');
+    const menu = document.querySelector('.menu');
+
+    searchbar.addEventListener('focus', () => {
+        menu.style.display = 'block';
+    })
+
+    searchbar.addEventListener('blur', () => {
+        menu.style.display = 'none';
+    })
+</script>
+</body>
+</html>

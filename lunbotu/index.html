@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style>
+        .container {
+            display: flex;
+
+        }
+        img {
+            width: 600px;
+            height: 300px;
+        }
+
+        button {
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div  class="container">
+        <button id="prv"><</button>
+        <img id="img" src="res/1.jpg" alt="1" >
+        <button id="next">></button>
+    </div>
+<script>
+    const imgArray = [
+        {
+            title:'the first image',
+            url:'./res/1.jpg',
+            description:'balalalallalaa'
+        },
+        {
+            title:'the second image',
+            url:'./res/2.png',
+            description:'balalalallalaa'
+        },
+        {
+            title:'the third image',
+            url:'./res/3.png',
+            description:'balalalallalaa'
+        }
+    ]
+    const img = document.getElementById('img');
+    let num = 0;
+
+    const prvBtn = document.getElementById('prv');
+    prvBtn.addEventListener('click', () => {
+        if(num <= 0) {
+            num = imgArray.length - 1;
+        } else {
+            num --;
+        }
+        img.src = imgArray[num].url;
+    })
+
+    const nextBtn = document.getElementById('next');
+    nextBtn.addEventListener('click', ()=> {
+        if(num >= imgArray.length - 1) {
+            num = 0;
+        } else {
+            num ++;
+        }
+        img.src = imgArray[num].url;
+    })
+
+    const n = setInterval(() => {
+        img.src = imgArray[num].url;
+        if(num === imgArray.length - 1) {
+            num = 0
+            return
+        }
+        num ++
+    },3000)
+
+    const container = document.querySelector('.container');
+    container.addEventListener('onmouseout', () => {
+        console.log('鼠标已离开')
+
+        clearInterval(n);
+    })
+
+</script>
+</body>
+</html>
