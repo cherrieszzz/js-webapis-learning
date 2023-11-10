@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+        }
+
+        .container {
+            width: 200px;
+            height: 200px;
+            padding: 10px;
+            background-color: #b00e0e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            今天是 <span class="current-date"></span>
+        </header>
+
+        <main>
+            <h1>下班倒计时</h1>
+
+            <h2><span class="djs"></span></h2>
+        </main>
+
+        <footer>
+                <span class="end-date"></span> 下课
+        </footer>
+    </div>
+
+    <script>
+        const current = document.querySelector('.current-date');
+        const end = document.querySelector('.end-date');
+        const djs = document.querySelector('.djs')
+
+        function getHours(count) {
+            let h  = parseInt(count / 60 / 60  % 24)
+            return  h<10 ? '0'+ h : h
+        }
+
+        function getMinutes(count) {
+            let m  = parseInt(count / 60 % 60)
+            return  m<10 ? '0' + m : m
+        }
+
+        function getSeconds(count) {
+            let s  = parseInt(count % 60)
+            return s < 10 ? '0' + s : s
+        }
+
+        setInterval(() => {
+            const now = new Date();
+            const headerContentData = {
+                year: now.getFullYear(),
+                month: now.getMonth() + 1,
+                day: now.getDate()
+            }
+            current.innerHTML = `${headerContentData.year}年${headerContentData.month}月${headerContentData.day}日 `
+
+            const endDate = new Date('2023-11-9 1:30:00');
+            end.innerHTML = `${endDate.getHours()}时${endDate.getMinutes()}分`;
+            const begin = +now;
+            const last = +endDate;
+            const count = (last - begin) / 1000;
+
+            let h  = getHours(count)
+            let m  = getMinutes(count)
+            let s  = getSeconds(count)
+            djs.innerHTML = `${h}小时 ${m}分 ${s} 秒`;
+        }, 100)
+
+    </script>
+</body>
+</html>
